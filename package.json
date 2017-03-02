@@ -1,0 +1,20 @@
+{
+  "name": "generator-meteor-rest-structure",
+  "repository": "git@github.com:afifsohaili/generator-meteor-rest-structure.git",
+  "version": "0.1.0",
+  "author": "afifsohaili <mafif@booster.com>",
+  "license": "MIT",
+  "description": "",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.1.0"
+  },
+  "devDependencies": {
+    "standard": "^9.0.0"
+  }
+}
