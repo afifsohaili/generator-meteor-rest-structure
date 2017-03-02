@@ -1,0 +1,1 @@
+# generator-meteor-rest-structure
