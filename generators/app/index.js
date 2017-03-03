@@ -16,6 +16,7 @@ module.exports = class extends Generator {
   }
 
   writing () {
+    this._copy('templates/client/main.html')
     this._copy('templates/imports/lib/layouts/app-footer.html')
     this._copy('templates/imports/lib/layouts/app-footer.js')
     this._copy('templates/imports/lib/layouts/app-header.html')
