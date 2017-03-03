@@ -1,5 +1,5 @@
 import { BlazeLayout } from 'meteor/kadira:blaze-layout'
-import { _ } from "meteor/underscore"
+import { _ } from 'meteor/underscore'
 
 import '../layouts/app-footer.html'
 import '../layouts/app-footer.js'
