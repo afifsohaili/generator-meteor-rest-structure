@@ -1,6 +1,6 @@
 import <%= Resource %>Collection from '../<%= resource %>-collection.js'
 
-const template = Template.<%= resource %>Show
+const template = Template.<%= resource %>Edit
 
 template.onCreated(function () {
   this.autorun(() => {
@@ -13,5 +13,13 @@ template.helpers({
     return <%= Resource %>Collection.findOne({
       _id: FlowRouter.getParam('_id')
     })
+  }
+})
+
+AutoForm.hooks({
+  edit<%= Resource %>Form: {
+    onSuccess: function (_method, docId) {
+      FlowRouter.go('<%= resource %>.show', { _id: docId })
+    }
   }
 })

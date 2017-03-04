@@ -14,20 +14,45 @@ module.exports = class extends Generator {
 
     this.log(`Generating resource "${resource}"...`)
 
-    if (!this.fs.exists(`imports/${resource}/${resource}-collection.js`)) {
-      this.fs.write(
-        `imports/${resource}/${resource}-collection.js`,
-        `export default new Mongo.Collection('${resource}')${os.EOL}`
-      )
-    }
-
     if (!this.fs.exists(`imports/${resource}/index.js`)) {
-      this.fs.write(`imports/${resource}/index.js`, os.EOL)
+      this.fs.write(`imports/${resource}/index.js`, '')
+    }
+    if (!this.fs.exists(`server/operations/${resource}.js`)) {
+      this.fs.write(`server/operations/${resource}.js`, '')
+    }
+    if (!this.fs.exists(`server/subscriptions/${resource}.js`)) {
+      this.fs.write(`server/subscriptions/${resource}.js`, '')
     }
 
     this._processRoute('index')
+    this._copy('templates/subscriptions/index.js')
+    this.fs.append(`server/subscriptions/${resource}.js`, `import '/imports/${resource}/subscriptions/index.js'${os.EOL}`)
+
+    this._processRoute('new')
+    this._copy('templates/operations/create.js')
+    this.fs.append(`server/operations/${resource}.js`, `import '/imports/${resource}/operations/create.js'${os.EOL}`)
+
+    this._processRoute('edit')
+    this._copy('templates/operations/update.js')
+    this.fs.append(`server/operations/${resource}.js`, `import '/imports/${resource}/operations/update.js'${os.EOL}`)
+
     this._processRoute('show')
-    // this._processRoute('index')
+    this._copy('templates/subscriptions/show.js')
+    this.fs.append(`server/subscriptions/${resource}.js`, `import '/imports/${resource}/subscriptions/show.js'${os.EOL}`)
+
+    this.fs.copyTpl(
+      this.templatePath('collection.js'),
+      this.destinationPath(`imports/${resource}/${resource}-collection.js`),
+      this._resource()
+    )
+    this.fs.copyTpl(
+      this.templatePath('schema.js'),
+      this.destinationPath(`imports/${resource}/${resource}-schema.js`),
+      this._resource()
+    )
+
+    this._copy('templates/pages/_form.html')
+    this._copy('templates/pages/_form.js')
 
     if (!this._writtenInMain()) {
       this.fs.append(
@@ -63,7 +88,8 @@ module.exports = class extends Generator {
   _resource () {
     return {
       resource: this.options.resource,
-      Resource: pascalCase(this.options.resource)
+      Resource: pascalCase(this.options.resource),
+      resourceSingular: this.options.resource.slice(0, -1)
     }
   }
 

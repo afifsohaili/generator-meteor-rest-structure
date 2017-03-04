@@ -9,7 +9,7 @@ module.exports = class extends Generator {
 
   install () {
     if (this.options.skipInstall) { return }
-    this.yarnInstall(['simpl-schema'])
+    this.yarnInstall(['simpl-schema', 'moment'])
     this.spawnCommand('meteor', [
       'add',
       'aldeed:autoform',
@@ -18,7 +18,8 @@ module.exports = class extends Generator {
       'fourseven:scss',
       'kadira:blaze-layout',
       'kadira:flow-router',
-      'reywood:publish-composite'
+      'mdg:validated-method',
+      'reywood:publish-composite',
     ])
   }
 

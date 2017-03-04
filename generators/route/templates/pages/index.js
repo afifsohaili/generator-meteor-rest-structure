@@ -1,8 +1,8 @@
-import <%= Resource %>Collection from "../<%= resource %>-collection.js"
+import <%= Resource %>Collection from '../<%= resource %>-collection.js'
 
 const template = Template.<%= resource %>Index
 
-template.onCreated(function() {
+template.onCreated(function () {
   this.autorun(() => {
     this.subscribe('<%= resource %>.index')
   })

@@ -1,3 +1,9 @@
 <template name="<%= resource %>Index">
   <h1><%= Resource %></h1>
+
+  <ul>
+    {{#each <%= resourceSingular %> in <%= resource %>}}
+    <li>{{<%= resourceSingular %>.title}}</li>
+    {{/each}}
+  </ul>
 </template>
