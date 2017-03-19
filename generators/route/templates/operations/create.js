@@ -4,13 +4,11 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import moment from 'moment'
 
 new ValidatedMethod({
-  name: '<%= resource %>.update',
-  validate (doc) {
-    <%= Resource %>Schema.validate(doc.modifier, { modifier: true })
-  },
+  name: '<%= resource %>.create',
+  validate: <%= Resource %>Schema.validator(),
   run: function (doc) {
-    doc.modifier.$set.updatedAt = moment().toDate()
-    <%= Resource %>Collection.update(doc._id, doc.modifier)
-    return doc._id
+    doc.createdAt = moment().toDate()
+    const <%= resourceSingular %> = <%= Resource %>Collection.insert(doc)
+    return <%= resourceSingular %>._id
   }
 })

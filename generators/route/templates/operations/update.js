@@ -1,12 +1,16 @@
-import <%= resource %>Schema from '../<%= resource %>-schema.js'
-import <%= resource %>Collection from '../<%= resource %>-collection.js'
+import <%= Resource %>Schema from '../<%= resource %>-schema.js'
+import <%= Resource %>Collection from '../<%= resource %>-collection.js'
 import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import moment from 'moment'
 
 new ValidatedMethod({
-  name: '<%= resource %>.create',
-  validate: <%= resource %>Schema.validator(),
+  name: '<%= resource %>.update',
+  validate (doc) {
+    <%= Resource %>Schema.validate(doc.modifier, { modifier: true })
+  },
   run: function (doc) {
-    const <%= resourceSingular %> = <%= resource %>Collection.insert(doc)
-    return <%= resourceSingular %>._id
+    doc.modifier.$set.updatedAt = moment().toDate()
+    <%= Resource %>Collection.update(doc._id, doc.modifier)
+    return doc._id
   }
 })

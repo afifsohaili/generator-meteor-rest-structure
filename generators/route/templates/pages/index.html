@@ -6,4 +6,8 @@
     <li>{{<%= resourceSingular %>.title}}</li>
     {{/each}}
   </ul>
+
+  <a href="{{pathFor '<%= resource %>.new'}}">
+    New <%= Resource %>
+  </a>
 </template>
