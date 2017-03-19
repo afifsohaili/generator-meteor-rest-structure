@@ -15,11 +15,13 @@ module.exports = class extends Generator {
       'aldeed:autoform',
       'aldeed:collection2-core',
       'aldeed:template-extension',
+      'arillo:flow-router-helpers',
       'fourseven:scss',
       'kadira:blaze-layout',
       'kadira:flow-router',
       'mdg:validated-method',
       'reywood:publish-composite',
+      'mixmax:smart-disconnect'
     ])
   }
 
