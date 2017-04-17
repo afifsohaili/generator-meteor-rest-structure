@@ -14,11 +14,16 @@ module.exports = class extends Generator {
 
   writing () {
     var resource = this.options.resource
-    var only = split(this.options.only)
-    var routes = (function () {
-      var fullRoutes = ['index', 'show', 'new', 'edit']
-      return _.intersection(fullRoutes, only)
-    }())
+    var fullRoutes = ['index', 'show', 'new', 'edit']
+    if (this.options.only) {
+      var only = split(this.options.only)
+      var routes = (function () {
+        return _.intersection(fullRoutes, only)
+      }())
+    }
+    else {
+      var routes = fullRoutes;
+    }
 
     this.log(`Generating resource "${resource}"...`)
 
