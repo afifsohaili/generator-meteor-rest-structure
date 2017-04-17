@@ -26,6 +26,11 @@ module.exports = class extends Generator {
       'reywood:publish-composite',
       'mixmax:smart-disconnect'
     ])
+    this.spawnCommand('meteor', [
+      'remove',
+      'autopublish',
+      'insecure'
+    ])
   }
 
   writing () {
