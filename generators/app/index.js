@@ -9,7 +9,10 @@ module.exports = class extends Generator {
 
   install () {
     if (this.options.skipInstall) { return }
-    this.yarnInstall(['simpl-schema', 'moment'])
+    this.yarnInstall([
+      'simpl-schema',
+      'moment'
+    ])
     this.spawnCommand('meteor', [
       'add',
       'aldeed:autoform',
@@ -27,6 +30,7 @@ module.exports = class extends Generator {
 
   writing () {
     this._copy('templates/client/main.html')
+    this._copy('templates/settings.json')
     this._copy('templates/imports/lib/layouts/app-footer.html')
     this._copy('templates/imports/lib/layouts/app-footer.js')
     this._copy('templates/imports/lib/layouts/app-header.html')
