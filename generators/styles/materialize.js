@@ -12,13 +12,12 @@ module.exports = class Materialize {
     ])
     this.generator.spawnCommand('meteor', [
       'add',
-      'materialize:materialize@0.98.2',
+      'materialize:materialize@=0.98.2',
       'useraccounts:materialize',
       'nicolaslopezj:tabular-materialize',
       'fourseven:scss',
       'aldeed:autoform',
-      'aldeed:collection2',
-      'gildaspk:autoform-materialize'
+      'mozfet:autoform-materialize'
     ])
   }
 
