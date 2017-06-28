@@ -8,7 +8,7 @@ new ValidatedMethod({
   validate: <%= Resource %>Schema.validator(),
   run: function (doc) {
     doc.createdAt = moment().toDate()
-    const <%= resourceSingular %> = <%= Resource %>Collection.insert(doc)
-    return <%= resourceSingular %>._id
+    const <%= resourceSingular %>Id = <%= Resource %>Collection.insert(doc)
+    return <%= resourceSingular %>Id
   }
 })
