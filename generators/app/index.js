@@ -24,7 +24,8 @@ module.exports = class extends Generator {
       'kadira:flow-router',
       'mdg:validated-method',
       'reywood:publish-composite',
-      'mixmax:smart-disconnect'
+      'mixmax:smart-disconnect',
+      'london:body-class'
     ])
     this.spawnCommand('meteor', [
       'remove',
@@ -43,6 +44,7 @@ module.exports = class extends Generator {
     this._copy('templates/imports/lib/layouts/app-layout.html')
     this._copy('templates/imports/lib/layouts/app-layout.js')
     this._copy('templates/imports/lib/layouts/preloader.html')
+    this._copy('templates/imports/views/body-class.js')
 
     this._copy('templates/imports/lib/services/layout-manager.js')
 
