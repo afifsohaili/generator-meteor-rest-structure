@@ -20,9 +20,8 @@ module.exports = class extends Generator {
       var routes = (function () {
         return _.intersection(fullRoutes, only)
       }())
-    }
-    else {
-      var routes = fullRoutes;
+    } else {
+      var routes = fullRoutes
     }
 
     this.log(`Generating resource "${resource}"...`)

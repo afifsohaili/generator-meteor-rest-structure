@@ -1,9 +1,9 @@
 module.exports = class Materialize {
-  constructor(generator) {
+  constructor (generator) {
     this.generator = generator
   }
 
-  install() {
+  install () {
     this.generator.spawnCommand('meteor', [
       'remove',
       'fourseven:scss',
@@ -21,7 +21,7 @@ module.exports = class Materialize {
     ])
   }
 
-  writing() {
+  writing () {
     this.generator._copy('templates/materialize/variables/_colors.scss')
     this.generator._copy('templates/materialize/variables/_spacing.scss')
     this.generator._copy('templates/materialize/variables/_typography.scss')
