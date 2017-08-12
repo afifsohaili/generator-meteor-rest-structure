@@ -4,20 +4,20 @@ module.exports = class Materialize {
   }
 
   install () {
-    this.generator.spawnCommand('meteor', [
+    this.generator.spawnCommandSync('meteor', [
       'remove',
       'fourseven:scss',
       'useraccounts:unstyled',
       'aldeed:autoform'
     ])
-    this.generator.spawnCommand('meteor', [
+    this.generator.spawnCommandSync('meteor', [
       'add',
-      'materialize:materialize@=0.98.2',
-      'useraccounts:materialize',
-      'nicolaslopezj:tabular-materialize',
-      'fourseven:scss',
       'aldeed:autoform',
-      'mozfet:autoform-materialize'
+      'fourseven:scss',
+      'materialize:materialize@=0.99.0',
+      'mozfet:autoform-materialize',
+      'nicolaslopezj:tabular-materialize',
+      'useraccounts:materialize',
     ])
   }
 
