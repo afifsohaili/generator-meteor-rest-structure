@@ -6,13 +6,13 @@ module.exports = class extends Generator {
   }
 
   install () {
-    this.spawnCommand('meteor', [
+    this.spawnCommandSync('meteor', [
       'add',
       'useraccounts:unstyled',
       'useraccounts:flow-routing',
       'accounts-password'
     ])
-    this.spawnCommand('meteor', [
+    this.spawnCommandSync('meteor', [
       'npm',
       'install',
       '--save',
