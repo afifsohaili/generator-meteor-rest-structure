@@ -1,3 +1,3 @@
-const <%= resourceSingular %> = new Mongo.Collection('<%= resource %>')
+const <%= resource %>Collection = new Mongo.Collection('<%= resource %>')
 
-export default <%= resourceSingular %>
+export default <%= resource %>Collection
