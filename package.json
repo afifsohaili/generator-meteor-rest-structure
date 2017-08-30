@@ -12,7 +12,7 @@
     "yeoman-generator"
   ],
   "scripts": {
-    "gulj": "gulp"
+    "gulp": "gulp"
   },
   "pre-push": ["gulp"],
   "dependencies": {
