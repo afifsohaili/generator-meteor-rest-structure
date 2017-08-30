@@ -11,6 +11,10 @@
   "keywords": [
     "yeoman-generator"
   ],
+  "scripts": {
+    "gulj": "gulp"
+  },
+  "pre-push": ["gulp"],
   "dependencies": {
     "pascal-case": "^2.0.0",
     "split-keywords": "^2.0.1",
@@ -23,6 +27,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-copy": "^1.0.1",
+    "pre-push": "^0.1.1",
     "standard": "^9.0.0"
   }
 }
