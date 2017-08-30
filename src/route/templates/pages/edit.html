@@ -1,0 +1,5 @@
+<template name="<%= resource %>Edit">
+  <h1>Edit</h1>
+  {{> <%= resource %>Form meteormethod="<%= resource %>.update" formId="edit<%= Resource %>Form"
+      formType="method-update" doc=<%= resourceSingular %>}}
+</template>

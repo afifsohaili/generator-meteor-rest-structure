@@ -1,0 +1,1 @@
+const template = Template.sessionsNew
