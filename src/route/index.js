@@ -1,3 +1,5 @@
+import { Inflectors } from 'en-inflectors'
+
 var Generator = require('yeoman-generator')
 var pascalCase = require('pascal-case')
 var os = require('os')
@@ -117,11 +119,12 @@ module.exports = class extends Generator {
 
   _resource () {
     const resource = this.options.resource
+    const resourceSingular = new Inflectors(this.options.resource).toSingular()
 
     return {
-      resource: resource,
+      resource,
       Resource: pascalCase(resource),
-      resourceSingular: resource.slice(0, -1),
+      resourceSingular,
       resourcePath: decamelize(resource, '-')
     }
   }
