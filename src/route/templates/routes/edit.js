@@ -7,7 +7,7 @@ if (Meteor.isClient) {
   import '../pages/_form.js'
 }
 
-FlowRouter.route('/<%= resource %>/:_id/edit', {
+FlowRouter.route('/<%= resourcePath %>/:_id/edit', {
   name: '<%= resource %>.edit',
   action: function () {
     Layout.Public.render({ body: '<%= resource %>Edit' })

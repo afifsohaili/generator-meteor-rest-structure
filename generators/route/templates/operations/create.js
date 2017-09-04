@@ -1,5 +1,5 @@
-import <%= Resource %>Schema from '../<%= resource %>-schema.js'
-import <%= Resource %>Collection from '../<%= resource %>-collection.js'
+import <%= Resource %>Schema from '../<%= resourcePath %>-schema.js'
+import <%= Resource %>Collection from '../<%= resourcePath %>-collection.js'
 import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import moment from 'moment'
 

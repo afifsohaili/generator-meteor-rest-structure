@@ -12,6 +12,7 @@
     "yeoman-generator"
   ],
   "dependencies": {
+    "decamelize": "^1.2.0",
     "pascal-case": "^2.0.0",
     "split-keywords": "^2.0.1",
     "underscore": "^1.8.3",

@@ -1,4 +1,4 @@
-import <%= Resource %>Collection from '../<%= resource %>-collection.js'
+import <%= Resource %>Collection from '../<%= resourcePath %>-collection.js'
 
 const template = Template.<%= resource %>Edit
 

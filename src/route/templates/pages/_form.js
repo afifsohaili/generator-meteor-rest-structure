@@ -1,4 +1,4 @@
-import <%= Resource %>Schema from '/imports/<%= resource %>/<%= resource %>-schema.js'
+import <%= Resource %>Schema from '/imports/<%= resourcePath %>/<%= resourcePath %>-schema.js'
 
 Template.<%= resource %>Form.helpers({
   schema () {

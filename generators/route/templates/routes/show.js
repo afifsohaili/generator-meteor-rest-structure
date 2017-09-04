@@ -5,7 +5,7 @@ if (Meteor.isClient) {
   import '../pages/show.js'
 }
 
-FlowRouter.route('/<%= resource %>/:_id', {
+FlowRouter.route('/<%= resourcePath %>/:_id', {
   name: '<%= resource %>.show',
   action: function () {
     Layout.Public.render({ body: '<%= resource %>Show' })

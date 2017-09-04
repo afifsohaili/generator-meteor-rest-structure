@@ -5,7 +5,7 @@ if (Meteor.isClient) {
   import '../pages/index.js'
 }
 
-FlowRouter.route('/<%= resource %>', {
+FlowRouter.route('/<%= resourcePath %>', {
   name: '<%= resource %>.index',
   action: function () {
     Layout.Public.render({ body: '<%= resource %>Index' })

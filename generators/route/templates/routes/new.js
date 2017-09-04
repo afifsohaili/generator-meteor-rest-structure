@@ -7,7 +7,7 @@ if (Meteor.isClient) {
   import '../pages/new.js'
 }
 
-FlowRouter.route('/<%= resource %>/new', {
+FlowRouter.route('/<%= resourcePath %>/new', {
   name: '<%= resource %>.new',
   action: function () {
     Layout.Public.render({ body: '<%= resource %>New' })

@@ -3,6 +3,7 @@ var pascalCase = require('pascal-case')
 var os = require('os')
 var split = require('split-keywords')
 var _ = require('underscore')
+var decamelize = require('decamelize')
 
 module.exports = class extends Generator {
   constructor (args, opts) {
@@ -14,7 +15,9 @@ module.exports = class extends Generator {
 
   writing () {
     var resource = this.options.resource
+    const resourcePath = decamelize(resource, '-')
     var fullRoutes = ['index', 'show', 'new', 'edit']
+
     if (this.options.only) {
       var only = split(this.options.only)
       var routes = (function () {
@@ -26,38 +29,38 @@ module.exports = class extends Generator {
 
     this.log(`Generating resource "${resource}"...`)
 
-    if (!this.fs.exists(`imports/${resource}/index.js`)) {
-      this.fs.write(`imports/${resource}/index.js`, '')
+    if (!this.fs.exists(`imports/${resourcePath}/index.js`)) {
+      this.fs.write(`imports/${resourcePath}/index.js`, '')
     }
-    if (!this.fs.exists(`server/operations/${resource}.js`)) {
-      this.fs.write(`server/operations/${resource}.js`, '')
+    if (!this.fs.exists(`server/operations/${resourcePath}.js`)) {
+      this.fs.write(`server/operations/${resourcePath}.js`, '')
     }
-    if (!this.fs.exists(`server/subscriptions/${resource}.js`)) {
-      this.fs.write(`server/subscriptions/${resource}.js`, '')
+    if (!this.fs.exists(`server/subscriptions/${resourcePath}.js`)) {
+      this.fs.write(`server/subscriptions/${resourcePath}.js`, '')
     }
 
     if (this._toGenerateRoute('index', routes)) {
       this._processRoute('index')
       this._copy('templates/subscriptions/index.js')
-      this.fs.append(`server/subscriptions/${resource}.js`, `import '/imports/${resource}/subscriptions/index.js'${os.EOL}`)
+      this.fs.append(`server/subscriptions/${resourcePath}.js`, `import '/imports/${resourcePath}/subscriptions/index.js'${os.EOL}`)
     }
 
     if (this._toGenerateRoute('new', routes)) {
       this._processRoute('new')
       this._copy('templates/operations/create.js')
-      this.fs.append(`server/operations/${resource}.js`, `import '/imports/${resource}/operations/create.js'${os.EOL}`)
+      this.fs.append(`server/operations/${resourcePath}.js`, `import '/imports/${resourcePath}/operations/create.js'${os.EOL}`)
     }
 
     if (this._toGenerateRoute('edit', routes)) {
       this._processRoute('edit')
       this._copy('templates/operations/update.js')
-      this.fs.append(`server/operations/${resource}.js`, `import '/imports/${resource}/operations/update.js'${os.EOL}`)
+      this.fs.append(`server/operations/${resourcePath}.js`, `import '/imports/${resourcePath}/operations/update.js'${os.EOL}`)
     }
 
     if (this._toGenerateRoute('show', routes)) {
       this._processRoute('show')
       this._copy('templates/subscriptions/show.js')
-      this.fs.append(`server/subscriptions/${resource}.js`, `import '/imports/${resource}/subscriptions/show.js'${os.EOL}`)
+      this.fs.append(`server/subscriptions/${resourcePath}.js`, `import '/imports/${resourcePath}/subscriptions/show.js'${os.EOL}`)
     }
 
     if (this._toGenerateRoute('new', routes) || this._toGenerateRoute('edit', routes)) {
@@ -67,19 +70,19 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('collection.js'),
-      this.destinationPath(`imports/${resource}/${resource}-collection.js`),
+      this.destinationPath(`imports/${resourcePath}/${resourcePath}-collection.js`),
       this._resource()
     )
     this.fs.copyTpl(
       this.templatePath('schema.js'),
-      this.destinationPath(`imports/${resource}/${resource}-schema.js`),
+      this.destinationPath(`imports/${resourcePath}/${resourcePath}-schema.js`),
       this._resource()
     )
 
     if (!this._writtenInMain()) {
       this.fs.append(
         'client/main.js',
-        `import '/imports/${resource}'${os.EOL}`
+        `import '/imports/${resourcePath}'${os.EOL}`
       )
     }
   }
@@ -96,26 +99,30 @@ module.exports = class extends Generator {
     this._copy(`templates/routes/${route}.js`)
 
     this.fs.append(
-      `imports/${resource}/index.js`,
+      `imports/${decamelize(resource, '-')}/index.js`,
       `import './routes/${route}.js'${os.EOL}`
     )
   }
 
   _copy (filePath) {
     var path = filePath.slice(/\//.exec(filePath).index + 1)
+    const resourcePath = decamelize(this.options.resource, '-')
 
     this.fs.copyTpl(
       this.templatePath(path),
-      this.destinationPath(`imports/${this.options.resource}/${path}`),
+      this.destinationPath(`imports/${resourcePath}/${path}`),
       this._resource()
     )
   }
 
   _resource () {
+    const resource = this.options.resource
+
     return {
-      resource: this.options.resource,
-      Resource: pascalCase(this.options.resource),
-      resourceSingular: this.options.resource.slice(0, -1)
+      resource: resource,
+      Resource: pascalCase(resource),
+      resourceSingular: resource.slice(0, -1),
+      resourcePath: decamelize(resource, '-')
     }
   }
 
