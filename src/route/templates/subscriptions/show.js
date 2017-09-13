@@ -1,9 +1,8 @@
 import <%= Resource %>Collection from '../<%= resourcePath %>-collection.js'
 
-Meteor.publish('<%= resource %>.show', function(postId) {
-  return <%= Resource %>Collection.find({
-    _id: postId
-  }, {
-    limit: 1
-  })
+Meteor.publish('<%= resource %>.show', function(<%= resource %>Id) {
+  return <%= Resource %>Collection.find(
+    { _id: <%= resource %>Id },
+    { limit: 1 }
+  )
 })
