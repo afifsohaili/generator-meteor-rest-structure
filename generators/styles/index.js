@@ -44,7 +44,9 @@ module.exports = function (_Generator) {
     key: '_copy',
     value: function _copy(filePath) {
       var path = filePath.slice(/\//.exec(filePath).index + 1);
-      this.fs.copy(this.templatePath(path), this.destinationPath('client/scss/' + path));
+      var exportPath = filePath.slice(new RegExp('/' + this.options.style).exec(filePath).index + ('/' + this.options.style).length + 1);
+      this.log(path, exportPath);
+      this.fs.copy(this.templatePath(path), this.destinationPath(exportPath));
     }
   }]);
 

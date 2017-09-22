@@ -6,27 +6,31 @@ module.exports = class Materialize {
   install () {
     this.generator.spawnCommandSync('meteor', [
       'remove',
-      'fourseven:scss',
       'useraccounts:unstyled',
-      'aldeed:autoform'
     ])
     this.generator.spawnCommandSync('meteor', [
       'add',
       'aldeed:autoform',
-      'fourseven:scss',
-      'materialize:materialize@=0.99.0',
       'mozfet:autoform-materialize',
       'nicolaslopezj:tabular-materialize',
       'useraccounts:materialize',
     ])
+    this.generator.npmInstall([
+      'materialize-css',
+    ], { save: true })
+
+    this.generator.spawnCommandSync('meteor', ['npm', 'install'])
   }
 
   writing () {
-    this.generator._copy('templates/materialize/variables/_colors.scss')
-    this.generator._copy('templates/materialize/variables/_spacing.scss')
-    this.generator._copy('templates/materialize/variables/_typography.scss')
-    this.generator._copy('templates/materialize/variables.scss')
+    this.generator._copy('templates/materialize/client/materialize.js')
+    this.generator._copy('templates/materialize/client/materialize.scss')
 
-    this.generator._copy('templates/materialize/base.scss')
+    this.generator._copy('templates/materialize/imports/views/stylesheets/variables/_colors.scss')
+    this.generator._copy('templates/materialize/imports/views/stylesheets/variables/_spacing.scss')
+    this.generator._copy('templates/materialize/imports/views/stylesheets/variables/_typography.scss')
+    this.generator._copy('templates/materialize/imports/views/stylesheets/variables.scss')
+
+    this.generator._copy('templates/materialize/imports/views/stylesheets/base.scss')
   }
 }
