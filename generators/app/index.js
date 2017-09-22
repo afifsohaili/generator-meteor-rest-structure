@@ -28,9 +28,14 @@ module.exports = function (_Generator) {
       if (this.options.skipInstall) {
         return;
       }
-      this.yarnInstall(['simpl-schema', 'moment']);
-      this.spawnCommand('meteor', ['add', 'aldeed:autoform', 'aldeed:collection2-core', 'aldeed:template-extension', 'arillo:flow-router-helpers', 'fourseven:scss', 'kadira:blaze-layout', 'kadira:flow-router', 'mdg:validated-method', 'reywood:publish-composite', 'mixmax:smart-disconnect', 'london:body-class']);
-      this.spawnCommand('meteor', ['remove', 'autopublish', 'insecure']);
+
+      console.log('Installing dependencies...');
+      console.log();
+
+      this.npmInstall(['simpl-schema', 'moment'], { save: true });
+      this.spawnCommandSync('meteor', ['add', 'aldeed:autoform', 'aldeed:collection2-core', 'aldeed:template-extension', 'arillo:flow-router-helpers', 'fourseven:scss', 'kadira:blaze-layout', 'kadira:flow-router', 'mdg:validated-method', 'reywood:publish-composite', 'mixmax:smart-disconnect', 'london:body-class', 'blaze-html-templates']);
+      this.spawnCommandSync('meteor', ['remove', 'autopublish', 'insecure', 'static-html']);
+      this.spawnCommandSync('meteor', ['npm', 'install']);
     }
   }, {
     key: 'writing',

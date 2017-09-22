@@ -9,11 +9,15 @@ module.exports = class extends Generator {
 
   install () {
     if (this.options.skipInstall) { return }
-    this.yarnInstall([
+
+    console.log('Installing dependencies...')
+    console.log()
+
+    this.npmInstall([
       'simpl-schema',
       'moment'
-    ])
-    this.spawnCommand('meteor', [
+    ], { save: true })
+    this.spawnCommandSync('meteor', [
       'add',
       'aldeed:autoform',
       'aldeed:collection2-core',
@@ -25,12 +29,18 @@ module.exports = class extends Generator {
       'mdg:validated-method',
       'reywood:publish-composite',
       'mixmax:smart-disconnect',
-      'london:body-class'
+      'london:body-class',
+      'blaze-html-templates',
     ])
-    this.spawnCommand('meteor', [
+    this.spawnCommandSync('meteor', [
       'remove',
       'autopublish',
-      'insecure'
+      'insecure',
+      'static-html'
+    ])
+    this.spawnCommandSync('meteor', [
+      'npm',
+      'install',
     ])
   }
 

@@ -26,6 +26,7 @@ module.exports = function (_Generator) {
     key: 'install',
     value: function install() {
       this.log('Your style option is ' + this.options.style);
+
       if (this.options.style === 'materialize') {
         var Materialize = require('./materialize.js');
         new Materialize(this).install();
