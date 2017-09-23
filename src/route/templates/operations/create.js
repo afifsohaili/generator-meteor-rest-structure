@@ -5,10 +5,18 @@ import moment from 'moment'
 
 new ValidatedMethod({
   name: '<%= resource %>.create',
-  validate: <%= Resource %>Schema.validator(),
+  validate: function(doc) {
+    return <%= Resource %>Schema.validate(
+      <%= Resource %>Schema.clean(doc, {
+        extendAutoValueContext: { isInsert: true }
+      })
+    )
+  },
   run: function (doc) {
-    doc.createdAt = moment().toDate()
-    const <%= resourceSingular %>Id = <%= Resource %>Collection.insert(doc)
+    const cleanedDoc = <%= Resource %>Schema.clean(doc, {
+      extendAutoValueContext: { isInsert: true }
+    })
+    const <%= resourceSingular %>Id = <%= Resource %>Collection.insert(cleanedDoc)
     return <%= resourceSingular %>Id
   }
 })

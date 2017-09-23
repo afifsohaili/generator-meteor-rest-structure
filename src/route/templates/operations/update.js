@@ -6,11 +6,22 @@ import moment from 'moment'
 new ValidatedMethod({
   name: '<%= resource %>.update',
   validate (doc) {
-    <%= Resource %>Schema.validate(doc.modifier, { modifier: true })
+    return <%= Resource %>Schema.validate(
+      doc.modifier, {
+        modifier: true,
+        extendAutoValueContext: { isUpdate: true }
+      }
+    )
   },
   run: function (doc) {
-    doc.modifier.$set.updatedAt = moment().toDate()
-    <%= Resource %>Collection.update(doc._id, doc.modifier)
+    const modifier = <%= Resource %>Schema.clean(
+      doc.modifier, {
+        modifier: true,
+        extendAutoValueContext: { isUpdate: true }
+      }
+    )
+    <%= Resource %>Collection.update(doc._id, modifier)
+
     return doc._id
   }
 })

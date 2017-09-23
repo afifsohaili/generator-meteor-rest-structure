@@ -3,7 +3,13 @@
 
   <ul>
     {{#each <%= resourceSingular %> in <%= resource %>}}
-    <li>{{<%= resourceSingular %>.title}}</li>
+    <li>
+      {{<%= resourceSingular %>.title}}
+      &nbsp;
+      <a href="{{pathFor '<%= resource %>.edit' _id=<%= resourceSingular %>._id}}">
+        Edit
+      </a>
+    </li>
     {{/each}}
   </ul>
 
