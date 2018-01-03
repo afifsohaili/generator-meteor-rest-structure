@@ -1,3 +1,5 @@
+var os = require('os');
+
 module.exports = class Materialize {
   constructor (generator) {
     this.generator = generator
@@ -32,5 +34,20 @@ module.exports = class Materialize {
     this.generator._copy('templates/materialize/imports/views/stylesheets/variables.scss')
 
     this.generator._copy('templates/materialize/imports/views/stylesheets/base.scss')
+
+    this.generator._copy('templates/materialize/imports/views/autoform.js');
+
+    if (!this._writtenInMain()) {
+      this.fs.append(
+        'client/main.js',
+        `import '/imports/views/autoform.js'${os.EOL}`
+      )
+    }
+  }
+
+  _writtenInMain () {
+    var content = this.fs.read('client/main.js')
+    var regex = new RegExp(`import.+imports/${this.options.resource}`)
+    return content.match(regex)
   }
 }
