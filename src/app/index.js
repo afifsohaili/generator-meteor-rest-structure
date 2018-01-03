@@ -64,6 +64,7 @@ module.exports = class extends Generator {
 
     this.fs.write('client/main.js', require('os').EOL)
     this.fs.append('client/main.js', "import '/imports/home/routes/show.js'" + require('os').EOL)
+    this.fs.append('client/main.js', "import '/imports/views/body-class.js'" + require('os').EOL);
   }
 
   _copy (filePath) {
