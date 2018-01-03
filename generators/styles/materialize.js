@@ -4,6 +4,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var os = require('os');
+
 module.exports = function () {
   function Materialize(generator) {
     _classCallCheck(this, Materialize);
@@ -32,6 +34,19 @@ module.exports = function () {
       this.generator._copy('templates/materialize/imports/views/stylesheets/variables.scss');
 
       this.generator._copy('templates/materialize/imports/views/stylesheets/base.scss');
+
+      this.generator._copy('templates/materialize/imports/views/autoform.js');
+
+      if (!this._writtenInMain()) {
+        this.fs.append('client/main.js', 'import \'/imports/views/autoform.js\'' + os.EOL);
+      }
+    }
+  }, {
+    key: '_writtenInMain',
+    value: function _writtenInMain() {
+      var content = this.fs.read('client/main.js');
+      var regex = new RegExp('import.+imports/' + this.options.resource);
+      return content.match(regex);
     }
   }]);
 
