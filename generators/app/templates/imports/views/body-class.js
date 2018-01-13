@@ -1,3 +1,7 @@
+import { BlazeLayout } from 'meteor/kadira:blaze-layout'
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import { Meteor } from 'meteor/meteor'
+
 BlazeLayout.setRoot('body')
 
 Meteor.startup(function () {
@@ -7,12 +11,6 @@ Meteor.startup(function () {
 
   FlowRouter.triggers.enter([function (context) {
     Blaze.addBodyClass(_bodyClass(context.route.name))
-  }])
-
-  FlowRouter.triggers.exit([function (context) {
-    $('body > header').css({
-      top: 0
-    })
   }])
 })
 

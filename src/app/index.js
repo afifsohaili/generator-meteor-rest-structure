@@ -1,4 +1,5 @@
-var Generator = require('yeoman-generator')
+import Generator from 'yeoman-generator'
+import { EOL } from 'os'
 
 module.exports = class extends Generator {
   constructor (args, opts) {
@@ -61,10 +62,11 @@ module.exports = class extends Generator {
     this._copy('templates/imports/home/pages/show.html')
     this._copy('templates/imports/home/pages/show.js')
     this._copy('templates/imports/home/routes/show.js')
+    this._copy('templates/imports/home/index.js')
 
-    this.fs.write('client/main.js', require('os').EOL)
-    this.fs.append('client/main.js', "import '/imports/home/routes/show.js'" + require('os').EOL)
-    this.fs.append('client/main.js', "import '/imports/views/body-class.js'" + require('os').EOL);
+    this.fs.write('client/main.js', '')
+    this.fs.append('client/main.js', `import '/imports/views/body-class.js'${EOL}`)
+    this.fs.append('client/main.js', `import '/imports/home/'${EOL}`)
   }
 
   _copy (filePath) {

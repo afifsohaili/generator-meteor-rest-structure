@@ -1,1 +1,1 @@
-import 'routes/show.js'
+import './routes/show.js'
