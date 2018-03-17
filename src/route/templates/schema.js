@@ -1,5 +1,6 @@
 import SimpleSchema from 'simpl-schema'
 import moment from 'moment'
+import { Tracker } from 'meteor/tracker'
 
 SimpleSchema.extendOptions(['autoform'])
 
@@ -30,4 +31,4 @@ export default new SimpleSchema({
       return moment().toDate()
     }
   }
-})
+}, { tracker: Tracker })
